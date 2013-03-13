@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C60" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="MAAnnotationModel" representedClassName="MAAnnotationModel" syncable="YES">
+        <attribute name="content" attributeType="String" syncable="YES"/>
+        <attribute name="creationDate" attributeType="Date" syncable="YES"/>
+        <attribute name="isSceneSpecific" attributeType="Boolean" syncable="YES"/>
+        <attribute name="percentagePosition" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="author" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MAUserModel" inverseName="annotations" inverseEntity="MAUserModel" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MACategoryModel" inverseName="annotations" inverseEntity="MACategoryModel" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MACommentModel" inverseName="annotation" inverseEntity="MACommentModel" syncable="YES"/>
+        <relationship name="movie" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MAMovieModel" inverseName="annotations" inverseEntity="MAMovieModel" syncable="YES"/>
+        <relationship name="ratings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MARatingModel" inverseName="annotation" inverseEntity="MARatingModel" syncable="YES"/>
+    </entity>
+    <entity name="MACategoryModel" representedClassName="MACategoryModel" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="annotations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MAAnnotationModel" inverseName="categories" inverseEntity="MAAnnotationModel" syncable="YES"/>
+    </entity>
+    <entity name="MACommentModel" representedClassName="MACommentModel" syncable="YES">
+        <attribute name="content" attributeType="String" syncable="YES"/>
+        <attribute name="creationDate" attributeType="Date" syncable="YES"/>
+        <relationship name="annotation" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MAAnnotationModel" inverseName="comments" inverseEntity="MAAnnotationModel" syncable="YES"/>
+        <relationship name="author" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MAUserModel" inverseName="comments" inverseEntity="MAUserModel" syncable="YES"/>
+        <relationship name="ratings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MARatingModel" inverseName="comment" inverseEntity="MARatingModel" syncable="YES"/>
+    </entity>
+    <entity name="MAMovieModel" representedClassName="MAMovieModel" syncable="YES">
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <relationship name="annotations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MAAnnotationModel" inverseName="movie" inverseEntity="MAAnnotationModel" syncable="YES"/>
+    </entity>
+    <entity name="MARatingModel" representedClassName="MARatingModel" syncable="YES">
+        <attribute name="isPositive" attributeType="Boolean" syncable="YES"/>
+        <relationship name="annotation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MAAnnotationModel" inverseName="ratings" inverseEntity="MAAnnotationModel" syncable="YES"/>
+        <relationship name="author" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MAUserModel" inverseName="ratings" inverseEntity="MAUserModel" syncable="YES"/>
+        <relationship name="comment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MACommentModel" inverseName="ratings" inverseEntity="MACommentModel" syncable="YES"/>
+    </entity>
+    <entity name="MAUserModel" representedClassName="MAUserModel" syncable="YES">
+        <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="annotations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MAAnnotationModel" inverseName="author" inverseEntity="MAAnnotationModel" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MACommentModel" inverseName="author" inverseEntity="MACommentModel" syncable="YES"/>
+        <relationship name="ratings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MARatingModel" inverseName="author" inverseEntity="MARatingModel" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="MAAnnotationModel" positionX="169" positionY="-63" width="128" height="193"/>
+        <element name="MACategoryModel" positionX="394" positionY="-48" width="128" height="75"/>
+        <element name="MACommentModel" positionX="-351" positionY="18" width="128" height="118"/>
+        <element name="MAMovieModel" positionX="403" positionY="63" width="128" height="75"/>
+        <element name="MARatingModel" positionX="-11" positionY="126" width="128" height="103"/>
+        <element name="MAUserModel" positionX="-180" positionY="-121" width="128" height="103"/>
+    </elements>
+</model>
